@@ -13,16 +13,52 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class MainActivity extends AppCompatActivity {
 
+    public TextInputLayout txtEmail ;
+    public String email ;
+    public TextInputLayout txtPassword ;
+    public String passWord ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-       /* EditText editText = findViewById(R.id.errorTxtEmail);
-       *//* editText.setText(editText.getText().toString() +"OnCreate");*/
+        initView();
+
+    }
+
+    public  void Thongbaodangnhap(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Thông báo");
+        if (email == null || passWord ==null)
+        {
+            builder.setMessage("Đăng nhập không thành công");
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+        else {
+            builder.setMessage("Đăng nhập thành công");
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+    }
+    public  void Giaodiendangky (View view){
+        Intent intent = new Intent(this, dangky.class);
+        startActivity(intent);
+    }
+    void initView(){
+        //////
         TextInputEditText errorTxtEmail = findViewById(R.id.errorTxtEmail);
+        TextInputEditText errorTxtPassword = findViewById(R.id.errorTxtPassword);
+
+        ///////
+        TextInputLayout txtEmail = findViewById(R.id.txtEmail);
+        String email = String.valueOf(txtEmail.getEditText().getText());
+        TextInputLayout txtPassword = findViewById(R.id.txtPassword);
+        String passWord = String.valueOf(txtPassword.getEditText().getText());
+        ///////
         errorTxtEmail.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -45,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        TextInputEditText errorTxtPassword = findViewById(R.id.errorTxtPassword);
         errorTxtPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence d, int start, int count, int after) {
@@ -68,58 +103,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-    }
-
-   /* @Override
-    protected void onStart(){
-        super.onStart();
-        EditText editText = findViewById(R.id.editTextText);
-        editText.setText(editText.getText().toString()+"OnStart");
-    }
-    @Override
-    protected void onResume(){
-        super.onResume();
-        EditText editText = findViewById(R.id.editTextText);
-        editText.setText(editText.getText().toString()+"OnResume");
-    }
-
-    @Override
-    protected void onPause(){
-        super.onPause();
-        EditText editText = findViewById(R.id.editTextText);
-        editText.setText(editText.getText().toString()+"OnPause");
-    }
-    @Override
-    protected void onStop(){
-        super.onStop();
-        EditText editText = findViewById(R.id.editTextText);
-        editText.setText(editText.getText().toString()+"OnStop");
-    }
-    @Override
-    protected void onRestart(){
-        super.onRestart();
-        EditText editText = findViewById(R.id.editTextText);
-        editText.setText(editText.getText().toString()+"OnRestart");
-    }
-    @Override
-    protected void onDestroy(){
-        super.onDestroy();
-        EditText editText = findViewById(R.id.editTextText);
-        editText.setText(editText.getText().toString()+"OnDestroy");
-    }*/
-
-    // chuc nang mo hop thoai
-    public  void Thongbaodangnhap(View view){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Thông báo");
-        builder.setMessage("Đăng nhập thành công");
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-    public  void Giaodiendangky (View view){
-        Intent intent = new Intent(this, dangky.class);
-        startActivity(intent);
     }
 
 

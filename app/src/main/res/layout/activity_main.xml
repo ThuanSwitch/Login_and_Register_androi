@@ -19,6 +19,7 @@
         android:textSize="30sp" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nhập email"
@@ -31,6 +32,7 @@
             />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nhập password"
