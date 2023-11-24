@@ -18,14 +18,14 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-    public TextInputLayout txtEmail ;
+    public TextInputEditText txtEmail ;
     public String email ;
-    public TextInputLayout txtPassword ;
+    public TextInputEditText txtPassword ;
     public String passWord ;
 
 
 
-    /////SharedReferences
+    ///SharedReferences
     private static final String PREF_USER = "User";
     private static final String KEY_USERNAME = "username";
     private static final String KEY_EMAIL = "email";
@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
     public  void Thongbaodangnhap(View view){
 
+        email = String.valueOf(txtEmail.getText());
+        passWord = String.valueOf(txtPassword.getText());
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Notification");
         if (email == null || passWord ==null)
@@ -55,11 +57,14 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog dialog = builder.create();
             dialog.show();
         }
-        System.out.println(saveEmail);
-        System.out.println(savePassword);
-        if (email == saveEmail && passWord == savePassword)
+        if (email.equals(saveEmail) && passWord.equals(savePassword))
         {
             builder.setMessage("Đăng nhập thành công");
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+        else {
+            builder.setMessage("user or password not correct");
             AlertDialog dialog = builder.create();
             dialog.show();
         }
@@ -70,16 +75,15 @@ public class MainActivity extends AppCompatActivity {
     }
     void initView(){
         //////
-        TextInputEditText errorTxtEmail = findViewById(R.id.errorTxtEmail);
-        TextInputEditText errorTxtPassword = findViewById(R.id.errorTxtPassword);
+
 
         ///////
-        txtEmail = findViewById(R.id.txtEmail);
-        email = String.valueOf(txtEmail.getEditText().getText());
-        txtPassword = findViewById(R.id.txtPassword);
-        passWord = String.valueOf(txtPassword.getEditText().getText());
+        txtEmail = findViewById(R.id.TxtEmail);
+
+        txtPassword = findViewById(R.id.TxtPassword);
+
         ///////
-        errorTxtEmail.addTextChangedListener(new TextWatcher() {
+        txtEmail.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -88,10 +92,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int count, int after) {
                 if(s.length()==0 ){
-                    errorTxtEmail.setError("Không được để trống email");
+                    txtEmail.setError("Không được để trống email");
                 }
                 else {
-                    errorTxtEmail.setError(null);
+                    txtEmail.setError(null);
                 }
             }
 
@@ -101,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        errorTxtPassword.addTextChangedListener(new TextWatcher() {
+        txtPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence d, int start, int count, int after) {
 
@@ -110,10 +114,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence d, int start, int count, int after) {
                 if(d.length()==0 ){
-                    errorTxtPassword.setError("Không được để trống password");
+                    txtPassword.setError("Không được để trống password");
                 }
                 else {
-                    errorTxtPassword.setError(null);
+                    txtPassword.setError(null);
                 }
             }
 

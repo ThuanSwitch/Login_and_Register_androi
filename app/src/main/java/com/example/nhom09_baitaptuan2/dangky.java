@@ -23,19 +23,18 @@ public class dangky extends AppCompatActivity {
 
 
     /////
-    public TextInputLayout txtUserName;
     public TextInputEditText errorTxtUsername;
     public String userName;
 
-    public TextInputLayout txtEmail;
+
     public TextInputEditText errorTxtEmail;
     public String email;
 
-    public TextInputLayout txtPassword;
+
     public TextInputEditText errorTxtPassword;
     public String password;
 
-    public TextInputLayout txtReEnterPassword;
+
     public TextInputEditText errorTxtReEnterPassword;
     public String reEnterPassword;
 
@@ -50,13 +49,6 @@ public class dangky extends AppCompatActivity {
         setContentView(R.layout.activity_dangky);
         InitView();
     }
-    public  void Thongbaodangky(View view){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Thông báo ");
-        builder.setMessage("Đăng ký thành công");
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
     public void GiaodienDangnhap(View view){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -66,24 +58,22 @@ public class dangky extends AppCompatActivity {
 
         ///userName
         errorTxtUsername = findViewById(R.id.errorTxtUsername);
-        txtUserName = findViewById(R.id.txtUser);
-        userName = String.valueOf(txtUserName.getEditText().getText());
+
+
 
         ///Email
         errorTxtEmail = findViewById(R.id.errorTxtEmail);
-        txtEmail = findViewById(R.id.txtEmail);
-        email = String.valueOf(txtEmail.getEditText().getText());
+
 
 
         ///Password
         errorTxtPassword = findViewById(R.id.errorTxtPassword);
-        txtPassword = findViewById(R.id.txtPassword);
-        password = String.valueOf(txtPassword.getEditText().getText());
+
+
 
         ///ReEnterPassword
         errorTxtReEnterPassword = findViewById(R.id.errorTxtReEnterPassword);
-        txtReEnterPassword = findViewById(R.id.txtReEnterPassword);
-        reEnterPassword = String.valueOf(txtReEnterPassword.getEditText().getText());
+
 
 
 
@@ -172,12 +162,16 @@ public class dangky extends AppCompatActivity {
             }
         });
     }
-    public  void saveData()
+    public  void saveData(View view)
     {
+        email = String.valueOf(errorTxtEmail.getText());
+        userName = String.valueOf(errorTxtUsername.getText());
+        password = String.valueOf(errorTxtPassword.getText());
+        reEnterPassword = String.valueOf(errorTxtReEnterPassword.getText());
 
         AlertDialog.Builder builder =  new AlertDialog.Builder(this);
         builder.setTitle("Notification");
-        if(password == reEnterPassword)
+        if(password.equals(reEnterPassword))
         {
             SharedPreferences sharedPreferences = getSharedPreferences(PREF_USER,MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -194,11 +188,6 @@ public class dangky extends AppCompatActivity {
             AlertDialog dialog = builder.create();
             dialog.show();
         }
-    }
-    public void loadData()
-    {
-        SharedPreferences sharedPreferences = getSharedPreferences(PREF_USER,MODE_PRIVATE);
-
     }
 
 
